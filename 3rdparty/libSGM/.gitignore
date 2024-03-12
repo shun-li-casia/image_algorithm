@@ -1,0 +1,5 @@
+include/libsgm_config.h
+build/
+.cache
+.clangd
+compile_commands.json
