@@ -16,11 +16,12 @@
 #ifndef IMAGE_PREPROCESSOR_DISPARITY_CALULATOR_H_
 #define IMAGE_PREPROCESSOR_DISPARITY_CALULATOR_H_
 
+#include <cuda_runtime.h>
 #include <opencv2/opencv.hpp>
 #include "utility_tool/system_lib.h"
 
 namespace image_algorithm {
-class DisparityCalculator {
+class DisparityCalculatorCuda {
  public:
   struct Param {
     int block_size{5};
@@ -32,7 +33,7 @@ class DisparityCalculator {
     int speckle_range{2};
     int uniqueness_ratio{6};
     int disp12_max_diff{200};
-    int pre_filter_cap{1};
+    int pre_filter_cap{0};
 
     bool SaveToYaml(const std::string& filename) const {
       YAML::Node node;
@@ -83,17 +84,18 @@ class DisparityCalculator {
     }
   };
 
-  static void CalcuDisparitySGBM(const cv::Mat& left, const cv::Mat& right,
-                             const Param& param, cv::Mat* disparity,
-                             cv::Mat* rgb_disparity);
-  static void CalcuDisparityBM(const cv::Mat& left, const cv::Mat& right,
-                             const Param& param, cv::Mat* disparity,
-                             cv::Mat* rgb_disparity);
+  struct DeviceBuffer {
+    DeviceBuffer() : data(nullptr) {}
+    explicit DeviceBuffer(size_t count) { allocate(count); }
+    void allocate(size_t count) { cudaMalloc(&data, count); }
+    ~DeviceBuffer() { cudaFree(data); }
+    void* data;
+  };
 
-  static void CalcuDisparityQuasiDense(const cv::Mat& left, const cv::Mat& right,
-                             const Param& param, cv::Mat* disparity,
-                             cv::Mat* rgb_disparity);
-
+  // calcu disparity with cuda
+  static void CalcuDisparityCuda(const cv::Mat& left, const cv::Mat& right,
+                                 const Param& param, cv::Mat* disp,
+                                 cv::Mat* rgb_disparity);
 };
 }  // namespace image_preprocessor
 

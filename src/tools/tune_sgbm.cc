@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
     param.pre_filter_cap = cv::getTrackbarPos("preFilterCap", "SGBM_disparity");
 
     cv::Mat disp, rgb_disparity;
-    image_algorithm::DisparityCalculator::CalcuDisparity(
+    image_algorithm::DisparityCalculator::CalcuDisparitySGBM(
         left, right, param, &disp, &rgb_disparity);
 
     // cv::resize(rgb_disparity, rgb_disparity, cv::Size(), 0.5, 0.5);
