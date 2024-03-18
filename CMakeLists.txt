@@ -30,7 +30,7 @@ include_directories(
     ${EIGEN3_INCLUDE_DIR}
     3rdparty/libSGM/include
 )
-find_package(CUDA REQUIRED)
+find_package(CUDA)
 if(${CUDA_FOUND})
     include_directories(
         ${CUDA_INCLUDE_DIRS}
@@ -69,7 +69,6 @@ else(${CUDA_FOUND})
         ${catkin_LIBRARIES}
         ${OpenCV_LIBS}
         ${PCL_LIBRARIES}
-        sgm
         yaml-cpp
     )
 endif(${CUDA_FOUND})
