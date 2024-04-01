@@ -33,7 +33,7 @@ void DisparityCalculator::CalcuDisparitySGBM(const cv::Mat& left,
   sgbm->setSpeckleWindowSize(param.speckle_window_size);
   sgbm->setSpeckleRange(param.speckle_range);
   sgbm->setDisp12MaxDiff(param.disp12_max_diff);
-  sgbm->setMode(cv::StereoSGBM::MODE_SGBM_3WAY);
+  sgbm->setMode(cv::StereoSGBM::MODE_SGBM);
 
   cv::Mat disparity_sgbm;
   sgbm->compute(left, right, disparity_sgbm);
@@ -42,7 +42,7 @@ void DisparityCalculator::CalcuDisparitySGBM(const cv::Mat& left,
 
   // colored disparity image
   cv::Mat disp8;
-  disparity_sgbm.convertTo(disp8, CV_8U, 255 / (128 * 16.));
+  disparity_sgbm.convertTo(disp8, CV_8U, 255 / (param.num_disparities * 16.));
   cv::applyColorMap(disp8, *rgb_disparity, cv::COLORMAP_JET);
 
   // cv::Ptr<cv::ximgproc::DisparityWLSFilter> filter =

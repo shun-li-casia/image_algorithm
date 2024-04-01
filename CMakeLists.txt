@@ -25,9 +25,13 @@ find_package(PCL REQUIRED)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(Eigen3)
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
-                    3rdparty/libSGM/include)
-find_package(CUDA REQUIRED)
+include_directories(
+    include
+    ${catkin_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIR}
+    3rdparty/libSGM/include
+)
+find_package(CUDA)
 if(${CUDA_FOUND})
   include_directories(${CUDA_INCLUDE_DIRS})
 endif(${CUDA_FOUND})
@@ -74,3 +78,6 @@ target_link_libraries(tune_sgbm ${PROJECT_NAME})
 
 add_executable(tune_sgbm_pcl src/tools/tune_sgbm_pcl.cc)
 target_link_libraries(tune_sgbm_pcl ${PROJECT_NAME})
+
+add_executable(open_usb_cam_display src/tools/open_usb_cam_display.cc)
+target_link_libraries(open_usb_cam_display ${PROJECT_NAME})
