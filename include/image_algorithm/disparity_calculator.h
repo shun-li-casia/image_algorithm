@@ -84,17 +84,17 @@ class DisparityCalculator {
   };
 
   static void CalcuDisparitySGBM(const cv::Mat& left, const cv::Mat& right,
-                             const Param& param, cv::Mat* disparity,
-                             cv::Mat* rgb_disparity);
+                                 const Param& param, cv::Mat* disparity,
+                                 cv::Mat* rgb_disparity);
   static void CalcuDisparityBM(const cv::Mat& left, const cv::Mat& right,
-                             const Param& param, cv::Mat* disparity,
-                             cv::Mat* rgb_disparity);
+                               const Param& param, cv::Mat* disparity,
+                               cv::Mat* rgb_disparity);
 
-  static void CalcuDisparityQuasiDense(const cv::Mat& left, const cv::Mat& right,
-                             const Param& param, cv::Mat* disparity,
-                             cv::Mat* rgb_disparity);
-
+  static void CalcuDisparityQuasiDense(const cv::Mat& left,
+                                       const cv::Mat& right, const Param& param,
+                                       cv::Mat* disparity,
+                                       cv::Mat* rgb_disparity);
 };
-}  // namespace image_preprocessor
+}  // namespace image_algorithm
 
 #endif

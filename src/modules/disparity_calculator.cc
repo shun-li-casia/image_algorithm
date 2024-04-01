@@ -37,6 +37,7 @@ void DisparityCalculator::CalcuDisparitySGBM(const cv::Mat& left,
 
   cv::Mat disparity_sgbm;
   sgbm->compute(left, right, disparity_sgbm);
+
   disparity_sgbm.convertTo(*disp, CV_32F, 1.0 / 16.0f);
 
   // colored disparity image
