@@ -91,8 +91,10 @@ int main(int argc, char** argv) {
   int update_cnt = 0;
   while (true) {
     param.block_size = cv::getTrackbarPos("blockSize", "SGBM_disparity");
-    param.p1 = cv::getTrackbarPos("p1", "SGBM_disparity") * param.block_size * param.block_size;
-    param.p2 = cv::getTrackbarPos("p2", "SGBM_disparity") * param.block_size * param.block_size;
+    param.p1 = cv::getTrackbarPos("p1", "SGBM_disparity") * param.block_size *
+               param.block_size;
+    param.p2 = cv::getTrackbarPos("p2", "SGBM_disparity") * param.block_size *
+               param.block_size;
 
     param.num_disparities =
         cv::getTrackbarPos("numDisparities", "SGBM_disparity");

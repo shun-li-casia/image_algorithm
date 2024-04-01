@@ -78,3 +78,6 @@ target_link_libraries(tune_sgbm ${PROJECT_NAME})
 
 add_executable(tune_sgbm_pcl src/tools/tune_sgbm_pcl.cc)
 target_link_libraries(tune_sgbm_pcl ${PROJECT_NAME})
+
+add_executable(open_usb_cam_display src/tools/open_usb_cam_display.cc)
+target_link_libraries(open_usb_cam_display ${PROJECT_NAME})
