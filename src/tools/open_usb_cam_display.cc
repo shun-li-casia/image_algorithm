@@ -19,15 +19,10 @@ int main(int argc, char** argv) {
 
   // 1.创建视频采集对象;
   VideoCapture cap;
-  cap.set(CAP_PROP_FOURCC, cv::VideoWriter::fourcc('U', 'Y', 'V', 'Y'));  // 宽度
-  cap.set(CAP_PROP_MODE, 3);  // 宽度
-  cap.set(CAP_PROP_FRAME_WIDTH, 3840);  // 宽度
-  cap.set(CAP_PROP_FRAME_HEIGHT, 1080);  // 高度
-  cap.set(CAP_PROP_FPS, 30);            // 帧率 帧/秒
   printf("set the camera!\n");
 
   // 2.打开默认相机;
-  cap.open(std::stoi(argv[1]));
+  cap.open(std::stoi(argv[1]), CAP_GSTREAMER);
 
   printf("open the camera!\n");
 
