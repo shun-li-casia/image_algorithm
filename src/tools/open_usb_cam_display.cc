@@ -19,15 +19,24 @@ int main(int argc, char** argv) {
 
   // 1.创建视频采集对象;
   VideoCapture cap;
-  printf("set the camera!\n");
 
   // 2.打开默认相机;
-  cap.open(std::stoi(argv[1]), CAP_GSTREAMER);
+  cap.open(std::stoi(argv[1]), CAP_V4L2);
 
-  printf("open the camera!\n");
+  /* cap.set(CAP_PROP_FOURCC, cv::VideoWriter::fourcc('U', 'Y', 'V', 'Y'));  //
+   * 宽度 */
+  cap.set(CAP_PROP_MODE, 3);             // 宽度
+  cap.set(CAP_PROP_FRAME_WIDTH, 3840);   // 宽度
+  cap.set(CAP_PROP_FRAME_HEIGHT, 1080);  // 高度
+  cap.set(CAP_PROP_FPS, 30);             // 帧率 帧/秒
 
   // 3.判断相机是否打开成功;
-  if (!cap.isOpened()) return -1;
+  if (!cap.isOpened()) {
+    printf("can not open the camera!\n");
+    return -1;
+  } else {
+    printf("open the camera successfully!\n");
+  }
 
   // 4.显示窗口命名;
   namedWindow("Video", 1);
@@ -41,8 +50,10 @@ int main(int argc, char** argv) {
     imshow("Video", frame);
 
     // 按键退出显示;
-    if (waitKey(30) >= 0) break;
-    ros::Rate(30).sleep();
+    if (waitKey(30) >= 0) {
+      imwrite("grab_example" + to_string(i) + ".png", frame);
+      break;
+    }
   }
 
   // 5.释放视频采集对象;
