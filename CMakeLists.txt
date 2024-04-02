@@ -70,7 +70,7 @@ else(${CUDA_FOUND})
   add_library(${PROJECT_NAME} src/modules/stereo_rectifier.cc
                               src/modules/disparity_calculator.cc)
   target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OpenCV_LIBS}
-                        ${PCL_LIBRARIES} sgm yaml-cpp)
+                        ${PCL_LIBRARIES} yaml-cpp)
 endif(${CUDA_FOUND})
 
 add_executable(tune_sgbm src/tools/tune_sgbm.cc)
