@@ -17,7 +17,8 @@
 #define IMAGE_PREPROCESSOR_DISPARITY_CALULATOR_H_
 
 #include <opencv2/opencv.hpp>
-#include "utility_tool/system_lib.h"
+#include <yaml-cpp/yaml.h>
+#include <fstream>
 
 namespace image_algorithm {
 class DisparityCalculator {
