@@ -34,7 +34,7 @@ include_directories(
 find_package(CUDA)
 if(${CUDA_FOUND})
   include_directories(${CUDA_INCLUDE_DIRS})
-endif(${CUDA_FOUND})
+endif()
 
 catkin_package(
   INCLUDE_DIRS
@@ -51,7 +51,7 @@ catkin_package(
   # DEPENDS system_lib
 )
 
-link_directories("3rdparty/libSGM/build/src")
+add_subdirectory(3rdparty/libSGM)
 
 if(${CUDA_FOUND})
   add_library(
@@ -66,12 +66,12 @@ if(${CUDA_FOUND})
     ${PCL_LIBRARIES}
     sgm
     yaml-cpp)
-else(${CUDA_FOUND})
+else()
   add_library(${PROJECT_NAME} src/modules/stereo_rectifier.cc
                               src/modules/disparity_calculator.cc)
   target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OpenCV_LIBS}
                         ${PCL_LIBRARIES} yaml-cpp)
-endif(${CUDA_FOUND})
+endif()
 
 add_executable(tune_sgbm src/tools/tune_sgbm.cc)
 target_link_libraries(tune_sgbm ${PROJECT_NAME})
