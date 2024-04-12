@@ -25,12 +25,8 @@ find_package(PCL REQUIRED)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(Eigen3)
 
-include_directories(
-    include
-    ${catkin_INCLUDE_DIRS}
-    ${EIGEN3_INCLUDE_DIR}
-    3rdparty/libSGM/include
-)
+include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
+                    3rdparty/libSGM/include)
 find_package(CUDA)
 if(${CUDA_FOUND})
   include_directories(${CUDA_INCLUDE_DIRS})
