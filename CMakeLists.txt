@@ -30,6 +30,7 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
 find_package(CUDA)
 if(${CUDA_FOUND})
   include_directories(${CUDA_INCLUDE_DIRS})
+    add_subdirectory(3rdparty/libSGM)
 endif()
 
 catkin_package(
@@ -47,7 +48,6 @@ catkin_package(
   # DEPENDS system_lib
 )
 
-add_subdirectory(3rdparty/libSGM)
 
 if(${CUDA_FOUND})
   add_library(
