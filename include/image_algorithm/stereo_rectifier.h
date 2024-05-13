@@ -16,9 +16,7 @@
 #ifndef IMAGE_PREPROCESSOR_STEREO_RECTIFIER_H_
 #define IMAGE_PREPROCESSOR_STEREO_RECTIFIER_H_
 
-#include "camodocal/camera_models/CameraFactory.h"
-#include "camodocal/camera_models/CataCamera.h"
-#include "camodocal/camera_models/PinholeCamera.h"
+#include "sensor_config/camera_model/pinhole_camera.h"
 
 #include <Eigen/Core>
 #include <opencv2/core/eigen.hpp>
@@ -33,8 +31,8 @@ class StereoRectifier {
                               const Eigen::Vector3d& trl,
                               Eigen::Matrix3d* rect_Rrl,
                               Eigen::Vector3d* rect_trl,
-                              camodocal::PinholeCamera::Parameters* cam_param_l,
-                              camodocal::PinholeCamera::Parameters* cam_param_r,
+                              sensor_config::PinholeCamera::Parameters* cam_param_l,
+                              sensor_config::PinholeCamera::Parameters* cam_param_r,
                               std::pair<cv::Mat, cv::Mat>* cam_l_maps,
                               std::pair<cv::Mat, cv::Mat>* cam_r_maps);
 };

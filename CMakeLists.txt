@@ -15,8 +15,7 @@ find_package(
   std_msgs
   cv_bridge
   utility_tool
-  sensor_config
-  camera_models)
+  sensor_config)
 
 # System dependencies are found with CMake's conventions
 find_package(OpenCV 4 REQUIRED)
@@ -42,7 +41,6 @@ catkin_package(
   cv_bridge
   utility_tool
   sensor_config
-  camera_models
   LIBRARIES
   ${PROJECT_NAME}
   # DEPENDS system_lib

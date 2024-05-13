@@ -20,8 +20,8 @@ namespace image_algorithm {
 void StereoRectifier::RectStereoParam(
     const Eigen::Matrix3d& Rrl, const Eigen::Vector3d& trl,
     Eigen::Matrix3d* rect_Rrl, Eigen::Vector3d* rect_trl,
-    camodocal::PinholeCamera::Parameters* cam_param_l,
-    camodocal::PinholeCamera::Parameters* cam_param_r,
+    sensor_config::PinholeCamera::Parameters* cam_param_l,
+    sensor_config::PinholeCamera::Parameters* cam_param_r,
     std::pair<cv::Mat, cv::Mat>* cam_l_maps,
     std::pair<cv::Mat, cv::Mat>* cam_r_maps) {
   cv::Mat Kl =
@@ -36,7 +36,7 @@ void StereoRectifier::RectStereoParam(
   cv::Mat Dr = (cv::Mat_<double>(1, 4) << cam_param_r->k1(), cam_param_r->k2(),
                 cam_param_r->p1(), cam_param_r->p2());
 
-  cv::Size image_size(cam_param_l->imageWidth(), cam_param_l->imageHeight());
+  cv::Size image_size(cam_param_l->img_w(), cam_param_l->img_h());
 
   cv::Mat cv_Rrl, cv_trl;
   cv::eigen2cv(Rrl, cv_Rrl);
