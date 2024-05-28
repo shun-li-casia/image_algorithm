@@ -17,6 +17,8 @@ int main(int argc, char** argv) {
   par.add<std::string>("r_img", 0, "right image", true);
   par.parse_check(argc, argv);
 
+
+
   const string lfile = par.get<string>("l_img");
   const string rfile = par.get<string>("r_img");
 

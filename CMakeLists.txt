@@ -29,7 +29,7 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
 find_package(CUDA)
 if(${CUDA_FOUND})
   include_directories(${CUDA_INCLUDE_DIRS})
-    add_subdirectory(3rdparty/libSGM)
+  add_subdirectory(3rdparty/libSGM)
 endif()
 
 catkin_package(
@@ -46,12 +46,9 @@ catkin_package(
   # DEPENDS system_lib
 )
 
-
 if(${CUDA_FOUND})
-  add_library(
-    ${PROJECT_NAME}
-    src/modules/stereo_rectifier.cc src/modules/disparity_calculator.cc
-    src/modules/disparity_calculator_cuda.cc)
+  add_library(${PROJECT_NAME} src/modules/disparity_calculator.cc
+                              src/modules/disparity_calculator_cuda.cc)
   target_link_libraries(
     ${PROJECT_NAME}
     ${catkin_LIBRARIES}
@@ -61,8 +58,7 @@ if(${CUDA_FOUND})
     sgm
     yaml-cpp)
 else()
-  add_library(${PROJECT_NAME} src/modules/stereo_rectifier.cc
-                              src/modules/disparity_calculator.cc)
+  add_library(${PROJECT_NAME} src/modules/disparity_calculator.cc)
   target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OpenCV_LIBS}
                         ${PCL_LIBRARIES} yaml-cpp)
 endif()
