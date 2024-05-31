@@ -68,3 +68,6 @@ target_link_libraries(tune_sgbm ${PROJECT_NAME})
 
 add_executable(tune_sgbm_pcl src/tools/tune_sgbm_pcl.cc)
 target_link_libraries(tune_sgbm_pcl ${PROJECT_NAME})
+
+add_executable(stereo_disparity src/tools/stereo_disparity.cc)
+target_link_libraries(stereo_disparity ${PROJECT_NAME})

@@ -35,6 +35,8 @@ class DisparityCalculator {
     int disp12_max_diff{200};
     int pre_filter_cap{1};
 
+    Param() = default;
+
     bool SaveToYaml(const std::string& filename) const {
       YAML::Node node;
       node["block_size"] = block_size;
@@ -82,7 +84,43 @@ class DisparityCalculator {
       std::cout << "disp12_max_diff: " << disp12_max_diff << std::endl;
       std::cout << "pre_filter_cap: " << pre_filter_cap << std::endl;
     }
+
+    Param& operator=(const Param& param) {
+      block_size = param.block_size;
+      p1 = param.p1;
+      p2 = param.p2;
+      min_disp = param.min_disp;
+      num_disparities = param.num_disparities;
+      speckle_window_size = param.speckle_window_size;
+      speckle_range = param.speckle_range;
+      uniqueness_ratio = param.uniqueness_ratio;
+      disp12_max_diff = param.disp12_max_diff;
+      pre_filter_cap = param.pre_filter_cap;
+      return *this;
+    }
+
+    Param(const Param& param) {
+      block_size = param.block_size;
+      p1 = param.p1;
+      p2 = param.p2;
+      min_disp = param.min_disp;
+      num_disparities = param.num_disparities;
+      speckle_window_size = param.speckle_window_size;
+      speckle_range = param.speckle_range;
+      uniqueness_ratio = param.uniqueness_ratio;
+      disp12_max_diff = param.disp12_max_diff;
+      pre_filter_cap = param.pre_filter_cap;
+    }
   };
+
+  DisparityCalculator();
+
+  DisparityCalculator(const Param& param);
+
+  void SetParam(const Param& param);
+
+  void CalcuDisparitySGBM(const cv::Mat& left, const cv::Mat& right,
+                          cv::Mat* disparity, cv::Mat* rgb_disparity);
 
   static void CalcuDisparitySGBM(const cv::Mat& left, const cv::Mat& right,
                                  const Param& param, cv::Mat* disparity,
@@ -95,6 +133,10 @@ class DisparityCalculator {
                                        const cv::Mat& right, const Param& param,
                                        cv::Mat* disparity,
                                        cv::Mat* rgb_disparity);
+
+ private:
+  Param param_;
+  cv::Ptr<cv::StereoSGBM> sgbm_;
 };
 }  // namespace image_algorithm
 
