@@ -21,7 +21,7 @@
 #include <ros/ros.h>
 #include <cv_bridge/cv_bridge.h>
 
-int resize_scale = 1;
+float resize_scale = 1;
 image_algorithm::DisparityCalculator calculator;
 image_algorithm::DisparityCalculator::Param param;
 
@@ -57,9 +57,9 @@ void imgCallback(const sensor_msgs::ImageConstPtr& msg) {
 
 int main(int argc, char** argv) {
   cmdline::parser par;
-  par.add<int>("resize_scale", 0, "resize scale", true);
+  par.add<float>("resize_scale", 's', "resize scale", true);
   par.parse_check(argc, argv);
-  resize_scale = par.get<int>("resize_scale");
+  resize_scale = par.get<float>("resize_scale");
 
   ros::init(argc, argv, "stereo_disparity");
   ros::NodeHandle nh;
